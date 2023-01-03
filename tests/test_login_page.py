@@ -1,20 +1,14 @@
 import time
 
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
 
 
 class TestPositiveScenarios:
 
     @pytest.mark.login
     @pytest.mark.positive
-    def test_positive_login(self):    
-        # Open browser
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-        time.sleep(2)
+    def test_positive_login(self, driver):
 
         # Go to webpage
         driver.get("https://practicetestautomation.com/practice-test-login/")
@@ -48,9 +42,8 @@ class TestPositiveScenarios:
         assert result[0] or result[1]
 
         # Verify button Log out is displayed on the new page
-        logout_button_locator = driver.find_element(By.XPATH, "//div[@class='wp-block-button aligncenter is-style-fill']//a")
+        logout_button_locator = driver.find_element(
+            By.XPATH, "//div[@class='wp-block-button aligncenter is-style-fill']//a")
 
         assert logout_button_locator
         # print('Button visible') if logout_button_locator else print('Button not visible')
-                
-

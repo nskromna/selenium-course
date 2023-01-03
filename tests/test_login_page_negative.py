@@ -1,18 +1,15 @@
 import time
 
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
+
 
 class TestNegativeScenarios:
 
     @pytest.mark.login
     @pytest.mark.negative
-    def test_negative_username(self):
+    def test_negative_username(self, driver):
         # Open page
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         driver.get("https://practicetestautomation.com/practice-test-login/")
 
         # Type username incorrectUser into Username field
@@ -30,18 +27,17 @@ class TestNegativeScenarios:
 
         # Verify error message is displayed
         error_msg_locator = driver.find_element(By.ID, "error")
-        assert error_msg_locator.is_displayed(), "Error message is not displayed, but it should be"
+        assert error_msg_locator.is_displayed(
+        ), "Error message is not displayed, but it should be"
 
         # Verify error message text is Your username is invalid!
         error_msg = error_msg_locator.text
         assert error_msg == "Your username is invalid!", "Error message is different to expected"
-    
 
     @pytest.mark.login
     @pytest.mark.negative
-    def test_negative_password(self):
+    def test_negative_password(self, driver):
         # Open page
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         driver.get("https://practicetestautomation.com/practice-test-login/")
 
         # Type username student into Username field
@@ -59,7 +55,8 @@ class TestNegativeScenarios:
 
         # Verify error message is displayed
         error_msg_locator = driver.find_element(By.ID, "error")
-        assert error_msg_locator.is_displayed(), "Error message is not displayed, but it should be"
+        assert error_msg_locator.is_displayed(
+        ), "Error message is not displayed, but it should be"
 
         # Verify error message text is Your password is invalid!
         error_msg = error_msg_locator.text
