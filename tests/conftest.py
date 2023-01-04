@@ -7,9 +7,9 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 from webdriver_manager.firefox import GeckoDriverManager
 
 
-@pytest.fixture()
+@pytest.fixture(params=["chrome", "firefox"])
 def driver(request):
-    browser = request.config.getoption("--browser")
+    browser = request.paramgit 
     print(f"Openinig {browser} driver")
 
     if browser == "chrome":
