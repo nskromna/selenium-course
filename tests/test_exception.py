@@ -1,6 +1,7 @@
 import pytest
 from selenium.webdriver.common.by import By
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as ec
 
 class TestExceptions:
 
@@ -13,8 +14,9 @@ class TestExceptions:
         add_btn_locator = driver.find_element(By.ID, "add_btn")
         add_btn_locator.click()
 
-        row_2_input_locator = driver.find_element(
-            By.XPATH, "//div[@id='row2']//input")
+        wait = WebDriverWait(driver, 10)
+        row_2_input_element = wait.until(ec.presence_of_element_located(
+            (By.XPATH, "//div[@id='row2']//input")))
 
-        assert row_2_input_locator.is_displayed(
+        assert row_2_input_element.is_displayed(
         ), "Input in row 2 should be displayed but it is not"
