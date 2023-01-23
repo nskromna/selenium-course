@@ -4,12 +4,14 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.firefox.service import Service as FirefoxService
-from webdriver_manager.firefox import GeckoDriverManager
+# from webdriver_manager.firefox import GeckoDriverManager
 
 
-@pytest.fixture() #(params=["chrome", "firefox"])
+@pytest.fixture() 
+#@pytest.fixture(params=["chrome", "firefox"])
 def driver(request):
-    browser = request.config.getoption("--browser") #request.param
+    browser = request.config.getoption("--browser") 
+    #browser = request.param
     print(f"Openinig {browser} driver")
 
     if browser == "chrome":
@@ -28,7 +30,7 @@ def driver(request):
         #     service=FirefoxService(GeckoDriverManager().install()))
     else:
         raise TypeError(f"Expected 'chrome' or 'firefox' but got {browser}")
-
+    # my_driver.implicitly_wait(10)
     yield my_driver
     print(f"Closing {browser} driver")
     my_driver.quit()
