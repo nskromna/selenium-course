@@ -16,8 +16,7 @@ class LoggedInSuccesfullyPage(BasePage):
     def expected_url(self) -> str:
         return self._url
 
-    @property        # Puch Submit button
-
+    @property
     def header(self) -> str:
         return super()._get_text(self.__header_locator)
 
