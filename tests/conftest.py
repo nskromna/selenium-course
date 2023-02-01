@@ -12,7 +12,7 @@ from selenium.webdriver.firefox.service import Service as FirefoxService
 def driver(request):
     browser = request.config.getoption("--browser") 
     #browser = request.param
-    print(f"Openinig {browser} driver")
+    print(f"Opening {browser} driver")
 
     if browser == "chrome":
         my_driver = webdriver.Chrome(
